@@ -1,0 +1,129 @@
+@page "/convert"
+@inject CurrencyService CurrencyService
+@inject ILogger<Convert> Logger
+
+<h3>Historical Currency Converter</h3>
+
+@if (isLoading)
+{
+    <p>Loading currencies...</p>
+}
+else
+{
+    <form method="post" @onsubmit="Submit" @formname="currency-conversion-form">
+        <AntiforgeryToken />
+
+        <div>
+            <label>Date:</label>
+            <InputDate @bind-Value="Model!.Date" class="form-control" />
+        </div>
+
+        <div>
+            <label>Amount:</label>
+            <InputNumber @bind-Value="Model!.Amount" class="form-control" />
+        </div>
+
+        <div>
+            <label>Base Currency:</label>
+            <InputSelect @bind-Value="Model!.BaseCurrency" class="form-control">
+                @foreach (var currency in currencies)
+                {
+                    <option value="@currency.Key">@currency.Key - @currency.Value</option>
+                }
+            </InputSelect>
+        </div>
+
+        <div>
+            <label>Target Currency:</label>
+            <InputSelect @bind-Value="Model!.TargetCurrency" class="form-control">
+                @foreach (var currency in currencies)
+                {
+                    <option value="@currency.Key">@currency.Key - @currency.Value</option>
+                }
+            </InputSelect>
+        </div>
+
+        <button type="submit">Convert</button>
+    </form>
+
+    @if (rate.HasValue)
+    {
+        <div class="alert alert-success mt-3">
+            <strong>Result:</strong> @Model!.Amount @Model.BaseCurrency = @rate.Value @Model.TargetCurrency on @Model.Date.ToShortDateString()
+        </div>
+    }
+    else if (conversionError)
+    {
+        <div class="alert alert-danger mt-3">
+            Conversion failed.
+        </div>
+    }
+}
+
+@code {
+    private Dictionary<string, string> currencies = new();
+    private decimal? rate;
+    private bool isLoading = true;
+    private bool conversionError = false;
+
+    [SupplyParameterFromForm]
+    private ConversionModel? Model { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCurrencies();
+        Model ??= new()
+        {
+            Date = DateTime.Today,
+            Amount = 1,
+            BaseCurrency = "USD",
+            TargetCurrency = "PHP"
+        };
+    }
+
+    private async Task LoadCurrencies()
+    {
+        currencies = await CurrencyService.GetSupportedCurrenciesAsync();
+        isLoading = false;
+    }
+
+    private async Task Submit()
+    {
+        Logger.LogInformation("Submitted: {Amount} {From} to {To} on {Date}",
+            Model?.Amount, Model?.BaseCurrency, Model?.TargetCurrency, Model?.Date);
+
+        if (Model is not null)
+        {
+            try
+            {
+                var result = await CurrencyService.GetHistoricalRateAsync(
+                    Model.BaseCurrency,
+                    Model.TargetCurrency,
+                    Model.Date.ToString("yyyy-MM-dd"),
+                    Model.Amount);
+
+                if (result.HasValue)
+                {
+                    rate = result.Value;
+                }
+                else
+                {
+                    conversionError = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                conversionError = true;
+                Logger.LogError(ex, "Conversion failed.");
+            }
+        }
+    }
+
+    public class ConversionModel
+    {
+        public DateTime Date { get; set; }
+        public decimal Amount { get; set; }
+        public string BaseCurrency { get; set; } = "";
+        public string TargetCurrency { get; set; } = "";
+    }
+}
