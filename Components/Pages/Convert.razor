@@ -4,7 +4,16 @@
 @inject CurrencyService CurrencyService
 @inject ILogger<Convert> Logger
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+     * {
+        font-family: 'Poppins', sans-serif;
+        box-sizing: border-box;
+    }
+</style>
+
 <h3>Historical Currency Converter</h3>
+
 
 @if (isLoading)
 {
