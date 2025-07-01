@@ -1,4 +1,6 @@
 @page "/convert"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
 @inject CurrencyService CurrencyService
 @inject ILogger<Convert> Logger
 
@@ -45,19 +47,6 @@ else
 
         <button type="submit">Convert</button>
     </form>
-
-    @if (rate.HasValue)
-    {
-        <div class="alert alert-success mt-3">
-            <strong>Result:</strong> @Model!.Amount @Model.BaseCurrency = @rate.Value @Model.TargetCurrency on @Model.Date.ToShortDateString()
-        </div>
-    }
-    else if (conversionError)
-    {
-        <div class="alert alert-danger mt-3">
-            Conversion failed.
-        </div>
-    }
 }
 
 @code {
@@ -105,6 +94,11 @@ else
                 if (result.HasValue)
                 {
                     rate = result.Value;
+
+                    var dateString = Model.Date.ToString("yyyy-MM-dd");
+                    var url = $"/converted?amount={Model.Amount}&rate={rate}&base={Model.BaseCurrency}&target={Model.TargetCurrency}&date={dateString}";
+
+                    NavigationManager.NavigateTo(url);
                 }
                 else
                 {

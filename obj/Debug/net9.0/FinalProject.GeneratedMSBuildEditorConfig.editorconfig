@@ -28,6 +28,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Db252ZXJ0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/mar/c\#_projects/FinalProject/Components/Pages/Converted.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Db252ZXJ0ZWQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/mar/c\#_projects/FinalProject/Components/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Db3VudGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
