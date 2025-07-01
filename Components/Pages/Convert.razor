@@ -4,81 +4,99 @@
 @inject CurrencyService CurrencyService
 @inject ILogger<Convert> Logger
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-     * {
-        font-family: 'Poppins', sans-serif;
-        box-sizing: border-box;
-    }
-</style>
-
-<h3>Historical Currency Converter</h3>
+<link href="css/convert.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
 
-@if (isLoading)
-{
-    <p>Loading currencies...</p>
-}
-else
-{
-    <EditForm Model="Model" OnValidSubmit="Submit" FormName="currency-conversion-form">
-        <DataAnnotationsValidator />
-        <AntiforgeryToken />
+<div class="convert-container">
+    <div class="convert-header">
+        <h3><i class="fas fa-money-bill-wave"></i> Historical Currency Converter</h3>
+        <p><i class="fas fa-history"></i> Convert currencies using historical exchange rates</p>
+    </div>
 
-        <div class="mb-3">
-            <label class="form-label">Date:</label>
-            <InputDate @bind-Value="Model!.Date" class="form-control" />
-            <ValidationMessage For="@(() => Model!.Date)" />
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Amount:</label>
-            <InputNumber @bind-Value="Model!.Amount" class="form-control" />
-            <ValidationMessage For="@(() => Model!.Amount)" />
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Base Currency:</label>
-            <InputSelect @bind-Value="Model!.BaseCurrency" class="form-control">
-                <option value="">-- Select Currency --</option>
-                @foreach (var currency in currencies)
-                {
-                    <option value="@currency.Key">@currency.Key - @currency.Value</option>
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => Model!.BaseCurrency)" />
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Target Currency:</label>
-            <InputSelect @bind-Value="Model!.TargetCurrency" class="form-control">
-                <option value="">-- Select Currency --</option>
-                @foreach (var currency in currencies)
-                {
-                    <option value="@currency.Key">@currency.Key - @currency.Value</option>
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => Model!.TargetCurrency)" />
-        </div>
-
-        <button type="submit" class="btn btn-primary mt-2" disabled="@isSubmitting">
-            @if (isSubmitting)
-            {
-                <span class="spinner-border spinner-border-sm me-2" role="status"></span>
-                <span>Converting...</span>
-            }
-            else
-            {
-                <span>Convert</span>
-            }
-        </button>
-    </EditForm>
-
-    @if (!string.IsNullOrWhiteSpace(validationMessage))
+    @if (isLoading)
     {
-        <div class="alert alert-danger mt-3">@validationMessage</div>
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <p><i class="fas fa-spinner fa-spin"></i> Loading currencies...</p>
+        </div>
     }
-}
+    else
+    {
+        <div class="convert-form">
+            <EditForm Model="Model" OnValidSubmit="Submit" FormName="currency-conversion-form">
+                <DataAnnotationsValidator />
+                <AntiforgeryToken />
+
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-calendar-alt"></i> Date</label>
+                    <InputDate @bind-Value="Model!.Date" class="form-control" />
+                    <ValidationMessage For="@(() => Model!.Date)" class="validation-message" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-coins"></i> Amount</label>
+                    <InputNumber @bind-Value="Model!.Amount" class="form-control" placeholder="Enter amount" />
+                    <ValidationMessage For="@(() => Model!.Amount)" class="validation-message" />
+                </div>
+
+                <div class="currency-row">
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-arrow-up"></i> From Currency</label>
+                        <InputSelect @bind-Value="Model!.BaseCurrency" class="form-control">
+                            <option value="">-- Select Currency --</option>
+                            @foreach (var currency in currencies)
+                            {
+                                <option value="@currency.Key">@currency.Key - @currency.Value</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(() => Model!.BaseCurrency)" class="validation-message" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-arrow-down"></i> To Currency</label>
+                        <InputSelect @bind-Value="Model!.TargetCurrency" class="form-control">
+                            <option value="">-- Select Currency --</option>
+                            @foreach (var currency in currencies)
+                            {
+                                <option value="@currency.Key">@currency.Key - @currency.Value</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(() => Model!.TargetCurrency)" class="validation-message" />
+                    </div>
+                </div>
+
+                @* <div class="swap-button">
+                    <button type="button" class="btn-swap" @onclick="SwapCurrencies" title="Swap currencies">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                </div> *@
+
+                <button type="submit" class="btn-convert" disabled="@isSubmitting">
+                    @if (isSubmitting)
+                    {
+                        <div class="loading-spinner">
+                            <div class="spinner"></div>
+                            <span><i class="fas fa-spinner fa-spin"></i> Converting...</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <span><i class="fas fa-exchange-alt"></i> Convert Currency</span>
+                    }
+                </button>
+            </EditForm>
+
+            @if (!string.IsNullOrWhiteSpace(validationMessage))
+            {
+                <div class="alert alert-danger">
+                    <strong><i class="fas fa-exclamation-triangle"></i> Error:</strong> @validationMessage
+                </div>
+            }
+        </div>
+    }
+</div>
+
 
 @code {
     private Dictionary<string, string> currencies = new();
@@ -116,6 +134,15 @@ else
         finally
         {
             isLoading = false;
+        }
+    }
+
+    private void SwapCurrencies()
+    {
+        if (Model != null)
+        {
+            (Model.BaseCurrency, Model.TargetCurrency) = (Model.TargetCurrency, Model.BaseCurrency);
+            StateHasChanged();
         }
     }
 
