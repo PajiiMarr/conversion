@@ -4,56 +4,106 @@
 @inject CurrencyService CurrencyService
 @inject ILogger<Convert> Logger
 
-<h3>Historical Currency Converter</h3>
+<link href="css/convert.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-@if (isLoading)
-{
-    <p>Loading currencies...</p>
-}
-else
-{
-    <form method="post" @onsubmit="Submit" @formname="currency-conversion-form">
-        <AntiforgeryToken />
 
-        <div>
-            <label>Date:</label>
-            <InputDate @bind-Value="Model!.Date" class="form-control" />
+<div class="convert-container">
+    <div class="convert-header">
+        <h3><i class="fas fa-money-bill-wave"></i> Historical Currency Converter</h3>
+        <p><i class="fas fa-history"></i> Convert currencies using historical exchange rates</p>
+    </div>
+
+    @if (isLoading)
+    {
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <p><i class="fas fa-spinner fa-spin"></i> Loading currencies...</p>
         </div>
+    }
+    else
+    {
+        <div class="convert-form">
+            <EditForm Model="Model" OnValidSubmit="Submit" FormName="currency-conversion-form">
+                <DataAnnotationsValidator />
+                <AntiforgeryToken />
 
-        <div>
-            <label>Amount:</label>
-            <InputNumber @bind-Value="Model!.Amount" class="form-control" />
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-calendar-alt"></i> Date</label>
+                    <InputDate @bind-Value="Model!.Date" class="form-control" />
+                    <ValidationMessage For="@(() => Model!.Date)" class="validation-message" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-coins"></i> Amount</label>
+                    <InputNumber @bind-Value="Model!.Amount" class="form-control" placeholder="Enter amount" />
+                    <ValidationMessage For="@(() => Model!.Amount)" class="validation-message" />
+                </div>
+
+                <div class="currency-row">
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-arrow-up"></i> From Currency</label>
+                        <InputSelect @bind-Value="Model!.BaseCurrency" class="form-control">
+                            <option value="">-- Select Currency --</option>
+                            @foreach (var currency in currencies)
+                            {
+                                <option value="@currency.Key">@currency.Key - @currency.Value</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(() => Model!.BaseCurrency)" class="validation-message" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-arrow-down"></i> To Currency</label>
+                        <InputSelect @bind-Value="Model!.TargetCurrency" class="form-control">
+                            <option value="">-- Select Currency --</option>
+                            @foreach (var currency in currencies)
+                            {
+                                <option value="@currency.Key">@currency.Key - @currency.Value</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(() => Model!.TargetCurrency)" class="validation-message" />
+                    </div>
+                </div>
+
+                @* <div class="swap-button">
+                    <button type="button" class="btn-swap" @onclick="SwapCurrencies" title="Swap currencies">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                </div> *@
+
+                <button type="submit" class="btn-convert" disabled="@isSubmitting">
+                    @if (isSubmitting)
+                    {
+                        <div class="loading-spinner">
+                            <div class="spinner"></div>
+                            <span><i class="fas fa-spinner fa-spin"></i> Converting...</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <span><i class="fas fa-exchange-alt"></i> Convert Currency</span>
+                    }
+                </button>
+            </EditForm>
+
+            @if (!string.IsNullOrWhiteSpace(validationMessage))
+            {
+                <div class="alert alert-danger">
+                    <strong><i class="fas fa-exclamation-triangle"></i> Error:</strong> @validationMessage
+                </div>
+            }
         </div>
+    }
+</div>
 
-        <div>
-            <label>Base Currency:</label>
-            <InputSelect @bind-Value="Model!.BaseCurrency" class="form-control">
-                @foreach (var currency in currencies)
-                {
-                    <option value="@currency.Key">@currency.Key - @currency.Value</option>
-                }
-            </InputSelect>
-        </div>
-
-        <div>
-            <label>Target Currency:</label>
-            <InputSelect @bind-Value="Model!.TargetCurrency" class="form-control">
-                @foreach (var currency in currencies)
-                {
-                    <option value="@currency.Key">@currency.Key - @currency.Value</option>
-                }
-            </InputSelect>
-        </div>
-
-        <button type="submit">Convert</button>
-    </form>
-}
 
 @code {
     private Dictionary<string, string> currencies = new();
     private decimal? rate;
     private bool isLoading = true;
-    private bool conversionError = false;
+    private bool isSubmitting = false;
+    private string? validationMessage;
 
     [SupplyParameterFromForm]
     private ConversionModel? Model { get; set; }
@@ -72,8 +122,28 @@ else
 
     private async Task LoadCurrencies()
     {
-        currencies = await CurrencyService.GetSupportedCurrenciesAsync();
-        isLoading = false;
+        try
+        {
+            currencies = await CurrencyService.GetSupportedCurrenciesAsync();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Failed to load currencies");
+            validationMessage = "Failed to load currencies. Please refresh the page.";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void SwapCurrencies()
+    {
+        if (Model != null)
+        {
+            (Model.BaseCurrency, Model.TargetCurrency) = (Model.TargetCurrency, Model.BaseCurrency);
+            StateHasChanged();
+        }
     }
 
     private async Task Submit()
@@ -81,10 +151,20 @@ else
         Logger.LogInformation("Submitted: {Amount} {From} to {To} on {Date}",
             Model?.Amount, Model?.BaseCurrency, Model?.TargetCurrency, Model?.Date);
 
-        if (Model is not null)
+        // Clear previous validation message
+        validationMessage = null;
+        isSubmitting = true;
+
+        try
         {
-            try
+            if (Model is not null)
             {
+                // Custom Validation Checks
+                if (!ValidateModel(Model))
+                {
+                    return; // Validation failed, error message already set
+                }
+
                 var result = await CurrencyService.GetHistoricalRateAsync(
                     Model.BaseCurrency,
                     Model.TargetCurrency,
@@ -102,21 +182,66 @@ else
                 }
                 else
                 {
-                    conversionError = true;
+                    validationMessage = "Conversion rate not available for the selected date. Please try a different date.";
                 }
             }
-            catch (Exception ex)
-            {
-                conversionError = true;
-                Logger.LogError(ex, "Conversion failed.");
-            }
         }
+        catch (Exception ex)
+        {
+            validationMessage = "An error occurred during conversion. Please try again.";
+            Logger.LogError(ex, "Conversion failed for {Amount} {From} to {To} on {Date}", 
+                Model?.Amount, Model?.BaseCurrency, Model?.TargetCurrency, Model?.Date);
+        }
+        finally
+        {
+            isSubmitting = false;
+            StateHasChanged(); // Force UI update
+        }
+    }
+
+    private bool ValidateModel(ConversionModel model)
+    {
+        // Negative or zero amount validation
+        if (model.Amount <= 0)
+        {
+            validationMessage = "Amount must be greater than zero.";
+            return false;
+        }
+
+        // Future date validation
+        if (model.Date > DateTime.Today)
+        {
+            validationMessage = "Date cannot be in the future.";
+            return false;
+        }
+
+        // Check if date is too far in the past (optional - API limitations)
+        if (model.Date < DateTime.Today.AddYears(-10))
+        {
+            validationMessage = "Date cannot be more than 10 years in the past.";
+            return false;
+        }
+
+        //Same currency validation
+        if (string.IsNullOrWhiteSpace(model.BaseCurrency) || string.IsNullOrWhiteSpace(model.TargetCurrency))
+        {
+            validationMessage = "Please select both base and target currencies.";
+            return false;
+        }
+
+        if (model.BaseCurrency.Equals(model.TargetCurrency, StringComparison.OrdinalIgnoreCase))
+        {
+            validationMessage = "Base and target currencies must be different.";
+            return false;
+        }
+
+        return true;
     }
 
     public class ConversionModel
     {
-        public DateTime Date { get; set; }
-        public decimal Amount { get; set; }
+        public DateTime Date { get; set; } = DateTime.Today;
+        public decimal Amount { get; set; } = 1;
         public string BaseCurrency { get; set; } = "";
         public string TargetCurrency { get; set; } = "";
     }
