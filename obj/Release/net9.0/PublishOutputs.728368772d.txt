@@ -1,0 +1,7 @@
+/Users/mar/c#_projects/conversion/out/FinalProject
+/Users/mar/c#_projects/conversion/out/appsettings.Development.json
+/Users/mar/c#_projects/conversion/out/appsettings.json
+/Users/mar/c#_projects/conversion/out/FinalProject.dll
+/Users/mar/c#_projects/conversion/out/FinalProject.deps.json
+/Users/mar/c#_projects/conversion/out/FinalProject.runtimeconfig.json
+/Users/mar/c#_projects/conversion/out/FinalProject.pdb
