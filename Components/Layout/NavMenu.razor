@@ -1,9 +1,12 @@
-﻿<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+﻿@using Microsoft.AspNetCore.Components.Routing
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 <style>
-    *{
+    * {
         font-family: 'Poppins', sans-serif;
     }
 </style>
+
 <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
     <div class="container-fluid">
         <img src="../images/logo.png" alt="" style="width: 70px; height: auto;" />
@@ -14,13 +17,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <NavLink class="nav-link text-white" href="/">Home</NavLink>
+                    <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Home</NavLink>
                 </li>
                 <li class="nav-item">
-                    <NavLink class="nav-link text-white" href="/convert">Convert</NavLink>
+                    <NavLink class="nav-link" href="/convert">Convert</NavLink>
                 </li>
                 <li class="nav-item">
-                    <NavLink class="nav-link text-white" href="/more">About Us</NavLink>
+                    <NavLink class="nav-link" href="/more">More</NavLink>
                 </li>
             </ul>
         </div>

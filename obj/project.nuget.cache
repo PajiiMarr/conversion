@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "Y0uw4Pm6rF0=",
   "success": true,
   "projectFilePath": "/Users/mar/c#_projects/FinalProject/FinalProject.csproj",
+=======
+  "dgSpecHash": "offQwHGHzNc=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Ria\\Documents\\SUMMER CLASS\\system\\conversion\\FinalProject.csproj",
+>>>>>>> bd2bcf7a86b5de027099028f91b77645f31a2866
   "expectedPackageFiles": [],
   "logs": []
 }

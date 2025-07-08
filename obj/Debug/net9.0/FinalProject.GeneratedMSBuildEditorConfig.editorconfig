@@ -9,17 +9,26 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FinalProject
 build_property.RootNamespace = FinalProject
+<<<<<<< HEAD
 build_property.ProjectDir = /Users/mar/c#_projects/FinalProject/
+=======
+build_property.ProjectDir = C:\Users\Ria\Documents\SUMMER CLASS\system\conversion\
+>>>>>>> bd2bcf7a86b5de027099028f91b77645f31a2866
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+<<<<<<< HEAD
 build_property.MSBuildProjectDirectory = /Users/mar/c#_projects/FinalProject
+=======
+build_property.MSBuildProjectDirectory = C:\Users\Ria\Documents\SUMMER CLASS\system\conversion
+>>>>>>> bd2bcf7a86b5de027099028f91b77645f31a2866
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
+<<<<<<< HEAD
 [/Users/mar/c\#_projects/FinalProject/Components/App.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -63,3 +72,52 @@ build_metadata.AdditionalFiles.CssScope = b-snde8xizgl
 [/Users/mar/c\#_projects/FinalProject/Components/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-i8afoxk9yk
+=======
+[C:/Users/Ria/Documents/SUMMER CLASS/system/conversion/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ria/Documents/SUMMER CLASS/system/conversion/Components/Pages/Convert.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb252ZXJ0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ria/Documents/SUMMER CLASS/system/conversion/Components/Pages/Converted.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb252ZXJ0ZWQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ria/Documents/SUMMER CLASS/system/conversion/Components/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ria/Documents/SUMMER CLASS/system/conversion/Components/Pages/Error.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ria/Documents/SUMMER CLASS/system/conversion/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ria/Documents/SUMMER CLASS/system/conversion/Components/Pages/More.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNb3JlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ria/Documents/SUMMER CLASS/system/conversion/Components/Pages/Weather.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXZWF0aGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ria/Documents/SUMMER CLASS/system/conversion/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ria/Documents/SUMMER CLASS/system/conversion/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ria/Documents/SUMMER CLASS/system/conversion/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-zr8p5ps9c8
+
+[C:/Users/Ria/Documents/SUMMER CLASS/system/conversion/Components/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-k6rl7vbbvg
+>>>>>>> bd2bcf7a86b5de027099028f91b77645f31a2866
