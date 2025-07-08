@@ -1,18 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cOzj621+R98=",
+  "dgSpecHash": "offQwHGHzNc=",
   "success": true,
-  "projectFilePath": "C:\\xampp\\htdocs\\sherard\\conversion\\FinalProject.csproj",
+  "projectFilePath": "C:\\Users\\Ria\\Documents\\SUMMER CLASS\\system\\conversion\\FinalProject.csproj",
   "expectedPackageFiles": [],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "message": "Problem reading the cache file C:\\xampp\\htdocs\\sherard\\conversion\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0.",
-      "projectPath": "C:\\xampp\\htdocs\\sherard\\conversion\\FinalProject.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\xampp\\htdocs\\sherard\\conversion\\FinalProject.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }
