@@ -8,34 +8,19 @@
     "net9.0": []
   },
   "packageFolders": {
-<<<<<<< HEAD
     "/Users/mar/.nuget/packages/": {}
-=======
-    "C:\\Users\\Ria\\.nuget\\packages\\": {}
->>>>>>> bd2bcf7a86b5de027099028f91b77645f31a2866
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "/Users/mar/c#_projects/FinalProject/FinalProject.csproj",
+      "projectUniqueName": "/Users/mar/c#_projects/conversion/FinalProject.csproj",
       "projectName": "FinalProject",
-      "projectPath": "/Users/mar/c#_projects/FinalProject/FinalProject.csproj",
+      "projectPath": "/Users/mar/c#_projects/conversion/FinalProject.csproj",
       "packagesPath": "/Users/mar/.nuget/packages/",
-      "outputPath": "/Users/mar/c#_projects/FinalProject/obj/",
+      "outputPath": "/Users/mar/c#_projects/conversion/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/mar/.nuget/NuGet/NuGet.Config"
-=======
-      "projectUniqueName": "C:\\Users\\Ria\\Documents\\SUMMER CLASS\\system\\conversion\\FinalProject.csproj",
-      "projectName": "FinalProject",
-      "projectPath": "C:\\Users\\Ria\\Documents\\SUMMER CLASS\\system\\conversion\\FinalProject.csproj",
-      "packagesPath": "C:\\Users\\Ria\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ria\\Documents\\SUMMER CLASS\\system\\conversion\\obj\\",
-      "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "C:\\Users\\Ria\\AppData\\Roaming\\NuGet\\NuGet.Config"
->>>>>>> bd2bcf7a86b5de027099028f91b77645f31a2866
       ],
       "originalTargetFrameworks": [
         "net9.0"
