@@ -1,5 +1,11 @@
+/Users/mar/c#_projects/conversion/bin/Debug/net9.0/out/web.config
 /Users/mar/c#_projects/conversion/bin/Debug/net9.0/appsettings.Development.json
 /Users/mar/c#_projects/conversion/bin/Debug/net9.0/appsettings.json
+/Users/mar/c#_projects/conversion/bin/Debug/net9.0/out/appsettings.Development.json
+/Users/mar/c#_projects/conversion/bin/Debug/net9.0/out/appsettings.json
+/Users/mar/c#_projects/conversion/bin/Debug/net9.0/out/FinalProject.deps.json
+/Users/mar/c#_projects/conversion/bin/Debug/net9.0/out/FinalProject.runtimeconfig.json
+/Users/mar/c#_projects/conversion/bin/Debug/net9.0/out/FinalProject.staticwebassets.endpoints.json
 /Users/mar/c#_projects/conversion/bin/Debug/net9.0/FinalProject.staticwebassets.runtime.json
 /Users/mar/c#_projects/conversion/bin/Debug/net9.0/FinalProject.staticwebassets.endpoints.json
 /Users/mar/c#_projects/conversion/bin/Debug/net9.0/FinalProject
@@ -21,8 +27,9 @@
 /Users/mar/c#_projects/conversion/obj/Debug/net9.0/scopedcss/Components/Layout/NavMenu.razor.rz.scp.css
 /Users/mar/c#_projects/conversion/obj/Debug/net9.0/scopedcss/bundle/FinalProject.styles.css
 /Users/mar/c#_projects/conversion/obj/Debug/net9.0/scopedcss/projectbundle/FinalProject.bundle.scp.css
-/Users/mar/c#_projects/conversion/obj/Debug/net9.0/compressed/h8zik5rlot-khy4lop6wu.gz
-/Users/mar/c#_projects/conversion/obj/Debug/net9.0/compressed/n9iexuh185-y7nqteqtw5.gz
+/Users/mar/c#_projects/conversion/obj/Debug/net9.0/compressed/h8zik5rlot-rfw67q41l0.gz
+/Users/mar/c#_projects/conversion/obj/Debug/net9.0/compressed/n9iexuh185-k1sbrvzet0.gz
+/Users/mar/c#_projects/conversion/obj/Debug/net9.0/compressed/wxdlmfobdp-9vwd0ojm6b.gz
 /Users/mar/c#_projects/conversion/obj/Debug/net9.0/compressed/va9062p875-bqjiyaj88i.gz
 /Users/mar/c#_projects/conversion/obj/Debug/net9.0/compressed/oh3yweg9t6-c2jlpeoesf.gz
 /Users/mar/c#_projects/conversion/obj/Debug/net9.0/compressed/dscylz8u5r-erw9l3u2r3.gz
@@ -78,10 +85,3 @@
 /Users/mar/c#_projects/conversion/obj/Debug/net9.0/FinalProject.pdb
 /Users/mar/c#_projects/conversion/obj/Debug/net9.0/FinalProject.genruntimeconfig.cache
 /Users/mar/c#_projects/conversion/obj/Debug/net9.0/ref/FinalProject.dll
-/Users/mar/c#_projects/conversion/bin/Debug/net9.0/out/web.config
-/Users/mar/c#_projects/conversion/bin/Debug/net9.0/out/appsettings.Development.json
-/Users/mar/c#_projects/conversion/bin/Debug/net9.0/out/appsettings.json
-/Users/mar/c#_projects/conversion/bin/Debug/net9.0/out/FinalProject.deps.json
-/Users/mar/c#_projects/conversion/bin/Debug/net9.0/out/FinalProject.runtimeconfig.json
-/Users/mar/c#_projects/conversion/bin/Debug/net9.0/out/FinalProject.staticwebassets.endpoints.json
-/Users/mar/c#_projects/conversion/obj/Debug/net9.0/compressed/wxdlmfobdp-9vwd0ojm6b.gz
